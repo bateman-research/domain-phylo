@@ -1,0 +1,68 @@
+(
+Cyanidioschyzon merolae:4,
+Dictyostelium discoideum:4,
+Thalassiosira pseudonana:4,
+(
+(
+(
+(
+Rattus norvegicus:4,
+Mus musculus:4
+)Muridae:4,
+(
+Felis catus:4,
+Canis lupus:4
+)Carnivora:4,
+(
+Homo sapiens:4,
+Pan troglodytes:4
+)Hominidae:4
+)Mammalia:4,
+Gallus gallus:4,
+(
+Takifugu rubripes:4,
+Danio rerio:4
+)Actinopteri:4
+)Chordata:4,
+(
+Drosophila melanogaster:4,
+Anopheles gambiae:4
+)Diptera:4,
+(
+Caenorhabditis elegans:4,
+Caenorhabditis briggsae:4
+)Caenorhabditis:4
+)Metazoa:4,
+(
+Plasmodium falciparum:4,
+Cryptosporidium parvum:4
+)Apicomplexa:4,
+Giardia intestinalis:4,
+Leishmania major:4,
+(
+Neurospora crassa:4,
+(
+Nannizzia gypsea:4,
+Aspergillus flavus:4
+)Eurotiomycetes:4,
+(
+Candida albicans:4,
+(
+Eremothecium gossypii:4,
+Saccharomyces cerevisiae:4
+)Saccharomycetaceae:4
+)Saccharomycetales:4,
+Schizosaccharomyces pombe:4
+)Ascomycota:4,
+(
+(
+Vitis vinifera:4,
+(
+Zea mays:4,
+Oryza sativa:4
+)Poaceae:4,
+Arabidopsis thaliana:4
+)Magnoliopsida:4,
+Physcomitrella patens:4
+)Streptophyta:4
+)Eukaryota:4;
