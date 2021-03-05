@@ -12,6 +12,7 @@ Code to create phylogenetic analyses of protein domains across a selected subset
 ### Input files
 
 1. Download (e.g. from Pfam) or create HMM models (with HMMER) for the protein domains of interest, such as the example file `BRF1.hmm`.
+It is also possible to use a single domain sequence in FASTA format.
 
 2. Create a list of species and associated proteome IDs from UniProt, similar to the one provided in this repository in `tol_species.tsv`.
 
@@ -35,11 +36,13 @@ for f in UP0*.fasta; do grep ">" $f | awk -v var="$f" '{print $1"\t"var}'; done 
 6. Search for domain hits in all proteomes with `hmmsearch`. 
 This command generates a `BRF1_proteomes_table.tsv` file for each proteome with the domain hits, and other HMMER related files such as the domain hits alignment `BRF1_proteomes.sto` and program raw output `BRF1_proteomes.log`.
 Repeat this step for every domain of interest.
+If using a FASTA sequence as input use the `phmmer` command instead of the `hmmsearch`.
 ```
 hmmsearch -o BRF1_proteomes.log -A BRF1_proteomes.sto --domtblout BRF1_proteomes.tsv BRF1.hmm proteomes.fasta; grep -v "#" BRF1_proteomes.tsv | awk '{print $1"\t"$3"\t"$4"\t"$6"\t"$13"\t"$14"\t"$16"\t"$17"\t"$20"\t"$21}' > BRF1_proteomes_table.tsv
 ```
 
-7. Change the input file names of the domains in the domain hit analysis script and run it as.
+7. Change the hardcoded input file names for each of the domains in the following script and run it.
+The output is a `species.tsv` table that contains the list of species where the domain is present.
 
 ```
 Rscript domain-hits.R
