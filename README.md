@@ -18,7 +18,7 @@ It is also possible to use a single sequence in FASTA format by converting it to
 hmmbuild sequence.hmm sequence.fasta
 ```
 
-2. Create a list of species and associated proteome IDs from UniProt, similar to the one provided in this repository in `tol_species.tsv`.
+2. Create a list of species and associated proteome IDs from UniProt (https://www.uniprot.org/proteomes/), similar to the one provided in this repository for a subset of representative species in `tol_species.tsv`.
 You can generate the list of species from the TSV file using:
 ```
 grep -v "#" tol_species.tsv | cut -f1 > tol_species.id
