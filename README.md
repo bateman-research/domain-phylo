@@ -12,11 +12,19 @@ Code to create phylogenetic analyses of protein domains across a selected subset
 ### Input files
 
 1. Download (e.g. from Pfam) or create HMM models (with HMMER) for the protein domains of interest, such as the example file `BRF1.hmm`.
-It is also possible to use a single domain sequence in FASTA format.
+It is also possible to use a single sequence in FASTA format by converting it to an HMM using HMMER with:
+
+```
+hmmbuild sequence.hmm sequence.fasta
+```
 
 2. Create a list of species and associated proteome IDs from UniProt, similar to the one provided in this repository in `tol_species.tsv`.
+You can generate the list of species from the TSV file using:
+```
+grep -v "#" tol_species.tsv | cut -f1 > tol_species.id
+```
 
-3. Download the taxonomic tree of species from the NCBI Common Taxonomy Browser (https://www.ncbi.nlm.nih.gov/Taxonomy/CommonTree/wwwcmt.cgi) by uploading the list of species and saving it as a phylip format:  `tol_species_tree.phy`.
+3. Download the taxonomic tree of species from the NCBI Common Taxonomy Browser (https://www.ncbi.nlm.nih.gov/Taxonomy/CommonTree/wwwcmt.cgi) by uploading the list of species (only species names: `tol_species.id`) and saving it as a phylip format:  `tol_species_tree.phy`.
 
 ### Steps
 
@@ -24,7 +32,7 @@ It is also possible to use a single domain sequence in FASTA format.
 ```
 grep -v "#" tol_species.tsv | cut -f2 | while read id; do echo $id; wget "ftp://ftp.ebi.ac.uk/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/Eukaryota/${id}/${id}*.fasta.gz"; gunzip ${id}*.fasta.gz; done
 
-rm UP0*DNA.fasta # remove the DNA sequences if downloaded too
+rm UP0*DNA.fasta UP0*additonal.fasta # remove other files often associated with proteomes (DNA and additional sequences)
 ```
 
 5. Concatenate all proteome sequences into a single FASTA file and extract a list of protein IDs from all proteomes, to be used later:
@@ -36,7 +44,6 @@ for f in UP0*.fasta; do grep ">" $f | awk -v var="$f" '{print $1"\t"var}'; done 
 6. Search for domain hits in all proteomes with `hmmsearch`. 
 This command generates a `BRF1_proteomes_table.tsv` file for each proteome with the domain hits, and other HMMER related files such as the domain hits alignment `BRF1_proteomes.sto` and program raw output `BRF1_proteomes.log`.
 Repeat this step for every domain of interest.
-If using a FASTA sequence as input use the `phmmer` command instead of the `hmmsearch`.
 ```
 hmmsearch -o BRF1_proteomes.log -A BRF1_proteomes.sto --domtblout BRF1_proteomes.tsv BRF1.hmm proteomes.fasta; grep -v "#" BRF1_proteomes.tsv | awk '{print $1"\t"$3"\t"$4"\t"$6"\t"$13"\t"$14"\t"$16"\t"$17"\t"$20"\t"$21}' > BRF1_proteomes_table.tsv
 ```
