@@ -32,7 +32,7 @@ grep -v "#" tol_species.tsv | cut -f1 > tol_species.id
 ```
 grep -v "#" tol_species.tsv | cut -f2 | while read id; do echo $id; wget "ftp://ftp.ebi.ac.uk/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/Eukaryota/${id}/${id}*.fasta.gz"; gunzip ${id}*.fasta.gz; done
 
-rm UP0*DNA.fasta UP0*additonal.fasta # remove other files often associated with proteomes (DNA and additional sequences)
+rm UP0*DNA.fasta UP0*additional.fasta # remove other files often associated with proteomes (DNA and additional sequences)
 ```
 
 5. Concatenate all proteome sequences into a single FASTA file and extract a list of protein IDs from all proteomes, to be used later:
