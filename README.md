@@ -5,7 +5,7 @@ Code to create phylogenetic analyses of protein domains across a selected subset
 ### Software requirements
 
 - HMMER v3 : http://hmmer.org/
-- `R` v3.6 with packages `seqinr`, `dplyr` and `tidyr`
+- `R` v3.6 with packages `seqinr`, `argparse`, `dplyr` and `tidyr`
 - iTOL (website): https://itol.embl.de/
 
 
@@ -49,11 +49,10 @@ Repeat this step for every domain of interest.
 hmmsearch -o BRF1_proteomes.log -A BRF1_proteomes.sto --domtblout BRF1_proteomes.tsv BRF1.hmm proteomes.fasta; grep -v "#" BRF1_proteomes.tsv | awk '{print $1"\t"$3"\t"$4"\t"$6"\t"$13"\t"$14"\t"$16"\t"$17"\t"$20"\t"$21}' > BRF1_proteomes_table.tsv
 ```
 
-7. Change the hardcoded input file names for each of the domains in the following script and run it.
-The output is a `species.tsv` table that contains the list of species where the domain is present.
-
+7. Use the domain analysis script to create a final table of the list of species where the protein domain is present.
+Use the `-h` option to see all the options.
 ```
-Rscript domain-hits.R
+Rscript domain-hits.R -p proteomes.tsv -s tol_species.tsv -t BRF1_proteomes_table.tsv -o BRF1_species.tsv -b 20 -n 1
 ```
 
 8. Create a new tree on the iTOL website by uploading the `tol_species_tree.phy` file and annotate species with domain hits using the Datasets tab.
