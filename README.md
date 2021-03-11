@@ -28,7 +28,8 @@ grep -v "#" tol_species.tsv | cut -f1 > tol_species.id
 
 ### Steps
 
-4. Download proteome sequences of the selected subset of species from UniProt using `wget`:
+4. Download proteome sequences of the selected subset of species from UniProt using `wget` as following. 
+If the proteome is not a 'reference proteome' download it manually from the UniProt website (https://www.uniprot.org/proteomes/).
 ```
 grep -v "#" tol_species.tsv | cut -f2 | while read id; do echo $id; wget "ftp://ftp.ebi.ac.uk/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/Eukaryota/${id}/${id}*.fasta.gz"; gunzip ${id}*.fasta.gz; done
 
