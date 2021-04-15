@@ -55,7 +55,7 @@ Use the `-h` option to see all the options.
 Rscript domain-hits.R -p proteomes.tsv -s tol_species.tsv -t BRF1_proteomes_table.tsv -o BRF1_species.tsv -b 20 -n 1
 ```
 
-8. Create a new tree on the iTOL website by uploading the `tol_species_tree.phy` file and annotate species with domain hits using the Datasets tab.
+8. Create a new tree on the iTOL website (https://itol.embl.de) by uploading the `tol_species_tree.phy` file and annotate species with domain hits using the Datasets tab.
 
 ### References
 
