@@ -88,13 +88,14 @@ domain.species = domain.hmmer %>%
   merge(proteomes.info) %>% 
   merge(species.tol) %>%
   group_by(proteome) %>%
-  top_n(number, bitscore) %>%
-  top_n(number, -evalue) %>%
+  top_n(number, bitscore) %>% # select top scoring match
+  top_n(number, -evalue) %>% # break any ties using the e-value
+  top_n(number, uniprotid) %>% # in case of duplicated proteins
   filter(bitscore > bit_thr) %>% # filter low scoring hits
   ungroup() %>% mutate(domain = tid)
 
 write.table(
-  domain.species %>% select(species, domain, bitscore),
+  domain.species %>% select(species, domain, uniprotid, bitscore),
   output,
   sep = "\t",
   quote = F,
